@@ -81,7 +81,7 @@ void loop() {
   float gz = mpu.getGyroZ();
 
   // Publish data to MQTT topics
-  String payload = "{\"acx\":" + String(acx) + ", \"acv\":" + String(acy) + ", \"acz\":" + String(acz) + ", \"gx\":" + String(gx) + ", \"gy\":" + String(gy) + ", \"gz\":" + String(gz) + "}";
+  String payload = "{\"acx\":" + String(acx) + ", \"acy\":" + String(acy) + ", \"acz\":" + String(acz) + ", \"gx\":" + String(gx) + ", \"gy\":" + String(gy) + ", \"gz\":" + String(gz) + "}";
   char msgBuffer[100];
   payload.toCharArray(msgBuffer, 100);
 

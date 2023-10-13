@@ -49,16 +49,24 @@ def on_message(client, userdata, msg):
     dynamodb = boto3.resource('dynamodb', aws_access_key_id=aws_access_key, aws_secret_access_key=aws_secret_key,
                               aws_session_token=aws_session_token, region_name=dynamodb_region)
     table = dynamodb.Table(dynamodb_table)
-    payload['timestamp'] = timestamp
+
+    item = {}
+    item['timestamp'] = timestamp
+    '''
+        Get data from MPU6050
+    '''
+    item['accel_x'] = acx
+    item['accel_y'] = acy
+    item['accel_z'] = acz
+    item['gyro_x'] = gx
+    item['gyro_y'] = gy
+    item['gyro_z'] = gz
+    '''
+        Get data from DHT22/DHT21
+    '''
     # payload['humidity'] = humidity
     # payload['temperature'] = temperature
-    payload['accel_x'] = acx
-    payload['accel_y'] = acy
-    payload['accel_z'] = acz
-    payload['gyro_x'] = gx
-    payload['gyro_y'] = gy
-    payload['gyro_z'] = gz
-    table.put_item(Item=payload)
+    table.put_item(Item=item)
 
 
 client = mqtt.Client()
